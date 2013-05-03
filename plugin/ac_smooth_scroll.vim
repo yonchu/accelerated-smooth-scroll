@@ -1,0 +1,75 @@
+scriptencoding utf-8
+if exists('g:loaded_ac_smooth_scroll')
+  finish
+endif
+let g:loaded_ac_smooth_scroll = 1
+
+let s:save_cpo = &cpo
+set cpo&vim
+
+
+" Global variables {{{
+let g:ac_smooth_scroll_enable_accelerating = get(g:, 'ac_smooth_scroll_enable_accelerating', 1)
+
+let g:ac_smooth_scroll_du_sleep_time_msec = get(g:, 'ac_smooth_scroll_du_sleep_time_msec', 10)
+let g:ac_smooth_scroll_fb_sleep_time_msec = get(g:, 'ac_smooth_scroll_fb_sleep_time_msec', 5)
+let g:ac_smooth_scroll_skip_redraw_line_size = get(g:, 'ac_smooth_scroll_skip_redraw_line_size', 0)
+
+let g:ac_smooth_scroll_limit_msec = get(g:, 'ac_smooth_scroll_limit_msec', 200)
+
+if !exists('*g:ac_smooth_scroll_calc_step')
+  function! g:ac_smooth_scroll_calc_step(key_count, wlcount)
+    if a:key_count > a:wlcount / 2
+      return a:wlcount
+    endif
+    return a:key_count
+  endfunction
+endif
+
+if !exists('*g:ac_smooth_scroll_calc_sleep_time_msec')
+  function! g:ac_smooth_scroll_calc_sleep_time_msec(key_count, sleep_time_msec)
+    return  a:sleep_time_msec - (a:key_count - 1)
+  endfunction
+endif
+
+if !exists('*g:ac_smooth_scroll_calc_skip_redraw_line_size')
+  function! g:ac_smooth_scroll_calc_skip_redraw_line_size(key_count, skip_redraw_line_size)
+    return  a:skip_redraw_line_size + (a:key_count - 1)
+  endfunction
+endif
+" }}}
+
+
+" Interfaces {{{
+nnoremap <silent> <Plug>(ac-smooth-scroll-c-d)
+      \ :<C-u>call ac_smooth_scroll#scroll('j', 2, g:ac_smooth_scroll_du_sleep_time_msec)<cr>
+nnoremap <silent> <Plug>(ac-smooth-scroll-c-u)
+      \ :<C-u>call ac_smooth_scroll#scroll('k', 2, g:ac_smooth_scroll_du_sleep_time_msec)<cr>
+
+nnoremap <silent> <Plug>(ac-smooth-scroll-c-f)
+      \ :<C-u>call ac_smooth_scroll#scroll('j', 1, g:ac_smooth_scroll_fb_sleep_time_msec)<cr>
+nnoremap <silent> <Plug>(ac-smooth-scroll-c-b)
+      \ :<C-u>call ac_smooth_scroll#scroll('k', 1, g:ac_smooth_scroll_fb_sleep_time_msec)<cr>
+" }}}
+
+
+" Default mappings {{{
+if !get(g:, 'ac_smooth_scroll_no_default_key_mappings', 0)
+  if !hasmapto('<Plug>(ac-smooth-scroll-c-d)')
+    nmap <silent> <unique> <C-d> <Plug>(ac-smooth-scroll-c-d)
+  endif
+  if !hasmapto('<Plug>(ac-smooth-scroll-c-u)')
+    nmap <silent> <unique> <C-u> <Plug>(ac-smooth-scroll-c-u)
+  endif
+
+  if !hasmapto('<Plug>(ac-smooth-scroll-c-f)')
+    nmap <silent> <unique> <C-f> <Plug>(ac-smooth-scroll-c-f)
+  endif
+  if !hasmapto('<Plug>(ac-smooth-scroll-c-b)')
+    nmap <silent> <unique> <C-b> <Plug>(ac-smooth-scroll-c-b)
+  endif
+endif
+" }}}
+
+let &cpo = s:save_cpo
+unlet s:save_cpo

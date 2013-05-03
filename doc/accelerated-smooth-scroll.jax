@@ -1,0 +1,104 @@
+*accelerated-smooth-scroll.jax*        Vim plugin for accelerated smooth scroll.
+
+Author     : Yonchu <yuyuchu3333@gmail.com>
+Home Page  : https://github.com/yonchu/accelerated-smooth-scroll
+
+==============================================================================
+CONTENTS                                  *accelerated-smooth-scroll-contents*
+
+Introduction                          |accelerated-smooth-scroll-introduction|
+Usage                                 |accelerated-smooth-scroll-usage|
+Interfaces                            |accelerated-smooth-scroll-interfaces|
+  Functions                           |accelerated-smooth-scroll-functions|
+  Mappings                            |accelerated-smooth-scroll-key-mappings|
+Settings                              |accelerated-smooth-scroll-settings|
+  Variables                           |accelerated-smooth-scroll-variables|
+
+==============================================================================
+INTRODUCTION                          *accelerated-smooth-scroll-introduction*
+
+<C-D>/<C-U>, <C-F>/<C-B>キーを置き換え、
+スムーズなスクロールとスクロール速度の加速を実現します。
+
+==============================================================================
+USAGE                                        *accelerated-smooth-scroll-usage*
+
+Example: >
+
+    デフォルトで以下のマッピングが設定されます。
+
+    nmap <silent> <unique> <C-d> <Plug>(ac-smooth-scroll-c-d)
+    nmap <silent> <unique> <C-u> <Plug>(ac-smooth-scroll-c-u)
+    nmap <silent> <unique> <C-f> <Plug>(ac-smooth-scroll-c-f)
+    nmap <silent> <unique> <C-b> <Plug>(ac-smooth-scroll-c-b)
+<
+
+==============================================================================
+INTERFACES                              *accelerated-smooth-scroll-interfaces*
+
+------------------------------------------------------------------------------
+FUNCTIONS                                 *accelerated-smooth-scroll-functions*
+
+以下関数をOverrideすることで、スクロールの加速度を微調整することができる。
+
+g:ac_smooth_scroll_calc_step(key_count, wlcount)                       *g:ac_smooth_scroll_calc_step*
+    一度にスクロールするステップ数を取得する。
+
+g:ac_smooth_scroll_calc_sleep_time_msec(key_count, sleep_time_msec)    *g:ac_smooth_scroll_calc_sleep_time_msec*
+    ステップ数スクロール後のスリープ時間を取得する。
+
+g:ac_smooth_scroll_calc_skip_redraw_line_size(key_count, skip_redraw_line_size)    *g:ac_smooth_scroll_calc_skip_redraw_line_size*
+    画面の再描画をスキップするタイミングを取得する。
+
+------------------------------------------------------------------------------
+MAPPINGS                              *accelerated-smooth-scroll-key-mappings*
+
+<Plug>(ac-smooth-scroll-c-d)                    *<Plug>(ac-smooth-scroll-c-d)*
+    半ページ下にスクロールする。
+    <C-d>の置き換え。
+
+<Plug>(ac-smooth-scroll-c-u)                    *<Plug>(ac-smooth-scroll-c-u)*
+    半ページ上にスクロールする。
+    <C-u>の置き換え。
+
+<Plug>(ac-smooth-scroll-c-f)                    *<Plug>(ac-smooth-scroll-c-f)*
+    1ページ下にスクロールする。
+    <C-f>の置き換え。
+
+<Plug>(ac-smooth-scroll-c-b)                    *<Plug>(ac-smooth-scroll-c-b)*
+    1ページ上にスクロールする。
+    <C-b>の置き換え。
+
+==============================================================================
+SETTINGS                                   *accelerated-smooth-scroll-setting*
+
+------------------------------------------------------------------------------
+VARIABLES                                *accelerated-smooth-scroll-variables*
+
+g:ac_smooth_scroll_no_default_key_mappings    *g:ac_smooth_scroll_no_default_key_mappings*
+    デフォルトキーマッピングを無効にする。
+    (Default: 0)
+
+g:ac_smooth_scroll_enable_accelerating        *g:ac_smooth_scroll_enable_accelerating*
+    スクロールの加速を行うかどうかを設定。
+    (Default: 1)
+
+g:ac_smooth_scroll_du_sleep_time_msec         *g:ac_smooth_scroll_du_sleep_time_msec*
+    半ページ移動時(<C-d>, <C-u>)のスリープ時間の初期値(ミリ秒)。
+    (Default: 10)
+
+g:ac_smooth_scroll_fb_sleep_time_msec         *g:ac_smooth_scroll_fb_sleep_time_msec*
+    1ページ移動時(<C-f>, <C-b>)のスリープ時間の初期値(ミリ秒)。
+    (Default: 5)
+
+g:ac_smooth_scroll_skip_redraw_line_size      *g:ac_smooth_scroll_skip_redraw_line_size*
+    再描画をスキップするタイミングの初期値。
+    (Default: 0)
+
+g:ac_smooth_scroll_limit_msec                 *g:ac_smooth_scroll_limit_msec*
+    連続スクロールの検出時間(ミリ秒)。
+    この時間以内にキーが押下された場合、連続スクロールと見なす。
+    (Default: 200)
+
+==============================================================================
+vim:tw=78:fo=tcq2mM:ts=8:ft=help:norl
