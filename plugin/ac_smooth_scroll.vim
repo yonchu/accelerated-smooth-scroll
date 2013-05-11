@@ -55,19 +55,10 @@ nnoremap <silent> <Plug>(ac-smooth-scroll-c-b)
 
 " Default mappings {{{
 if !get(g:, 'ac_smooth_scroll_no_default_key_mappings', 0)
-  if !hasmapto('<Plug>(ac-smooth-scroll-c-d)')
-    nmap <silent> <unique> <C-d> <Plug>(ac-smooth-scroll-c-d)
-  endif
-  if !hasmapto('<Plug>(ac-smooth-scroll-c-u)')
-    nmap <silent> <unique> <C-u> <Plug>(ac-smooth-scroll-c-u)
-  endif
-
-  if !hasmapto('<Plug>(ac-smooth-scroll-c-f)')
-    nmap <silent> <unique> <C-f> <Plug>(ac-smooth-scroll-c-f)
-  endif
-  if !hasmapto('<Plug>(ac-smooth-scroll-c-b)')
-    nmap <silent> <unique> <C-b> <Plug>(ac-smooth-scroll-c-b)
-  endif
+  nmap <silent> <C-d> <Plug>(ac-smooth-scroll-c-d)
+  nmap <silent> <C-u> <Plug>(ac-smooth-scroll-c-u)
+  nmap <silent> <C-f> <Plug>(ac-smooth-scroll-c-f)
+  nmap <silent> <C-b> <Plug>(ac-smooth-scroll-c-b)
 endif
 " }}}
 
