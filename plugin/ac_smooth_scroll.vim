@@ -12,7 +12,7 @@ set cpo&vim
 let g:ac_smooth_scroll_enable_accelerating = get(g:, 'ac_smooth_scroll_enable_accelerating', 1)
 
 let g:ac_smooth_scroll_du_sleep_time_msec = get(g:, 'ac_smooth_scroll_du_sleep_time_msec', 10)
-let g:ac_smooth_scroll_fb_sleep_time_msec = get(g:, 'ac_smooth_scroll_fb_sleep_time_msec', 5)
+let g:ac_smooth_scroll_fb_sleep_time_msec = get(g:, 'ac_smooth_scroll_fb_sleep_time_msec', 10)
 let g:ac_smooth_scroll_skip_redraw_line_size = get(g:, 'ac_smooth_scroll_skip_redraw_line_size', 0)
 
 let g:ac_smooth_scroll_limit_msec = get(g:, 'ac_smooth_scroll_limit_msec', 200)
@@ -34,7 +34,8 @@ endif
 
 if !exists('*g:ac_smooth_scroll_calc_skip_redraw_line_size')
   function! g:ac_smooth_scroll_calc_skip_redraw_line_size(key_count, skip_redraw_line_size)
-    return  a:skip_redraw_line_size + (a:key_count - 1)
+    " return  a:skip_redraw_line_size + (a:key_count - 1)
+    return a:skip_redraw_line_size
   endfunction
 endif
 " }}}

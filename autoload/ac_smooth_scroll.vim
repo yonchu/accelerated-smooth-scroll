@@ -41,6 +41,8 @@ function! s:calc_skip_redraw_line_size()
 endfunction
 
 function! s:scroll(cmd, step, sleep_time_msec, skip_redraw_line_size, wlcount)
+  " Make the command to move display.
+  " Calc tob and vbl.
   let move_disp_cmd = 'normal! '
   if a:cmd == 'j'
     " Scroll down.
@@ -54,38 +56,47 @@ function! s:scroll(cmd, step, sleep_time_msec, skip_redraw_line_size, wlcount)
     let move_disp_cmd = move_disp_cmd."\<C-Y>"
   endif
 
+  " Make the command to sleep.
   let sleep_cmd = 'sleep '.a:sleep_time_msec.'m'
 
   let i = 0
   let j = 0
   while i < a:wlcount
-    let step = a:step
     let rest = a:wlcount - i
+    " Move cursor without moving display, if top or end of file is displaied.
     if line(vbl) == tob
       execute 'normal! '.rest.a:cmd
       break
     endif
-    let i += step
 
+    " Calc cursor step count.
+    let i += a:step
+    let step = a:step
     if rest < step
       let step = rest
     endif
+
+    " Move cursor.
     execute 'normal! '.step.a:cmd
     let k = 0
+    " Move display.
     while k < step
       let k +=1
       execute move_disp_cmd
     endwhile
 
-    if i < a:wlcount && j >= a:skip_redraw_line_size
-      let j = 0
-      redraw
-    else
-      let j = j + 1
-    endif
-
-    if a:sleep_time_msec > 0
-      execute sleep_cmd
+    if i < a:wlcount
+      " Redraw.
+      if j >= a:skip_redraw_line_size
+        let j = 0
+        redraw
+      else
+        let j = j + 1
+      endif
+      " Sleep.
+      if a:sleep_time_msec > 0
+        execute sleep_cmd
+      endif
     endif
   endwhile
 endfunction
