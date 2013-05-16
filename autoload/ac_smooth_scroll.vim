@@ -6,22 +6,12 @@ set cpo&vim
 " Script's functions/variables {{{
 let s:key_count = 0
 
-function! s:is_limit_time_over(cmd, windiv)
+function! s:get_elapsed_time(cmd, windiv)
     let previous_timestamp = get(s:, a:cmd.a:windiv.'_timestamp_misec', [0, 0])
     let current_timestamp = reltime()
     let [sec, microsec] = reltime(previous_timestamp, current_timestamp)
     let msec = sec * 1000 + microsec / 1000
-    return msec > g:ac_smooth_scroll_limit_msec
-endfunction
-
-function! s:update_key_count(cmd, windiv)
-  if !g:ac_smooth_scroll_enable_accelerating
-    return
-  endif
-  if s:is_limit_time_over(a:cmd, a:windiv)
-    let s:key_count = 0
-  endif
-  let s:key_count += 1
+    return msec
 endfunction
 
 function! s:calc_step(wlcount)
@@ -112,7 +102,20 @@ function! ac_smooth_scroll#scroll(cmd, windiv, sleep_time_msec)
     set nocul
   endif
 
-  call s:update_key_count(a:cmd, a:windiv)
+  let elapsed_time = s:get_elapsed_time(a:cmd, a:windiv)
+
+  " Check min time.
+  if elapsed_time >= 0 && elapsed_time < g:ac_smooth_scroll_min_limit_msec
+    return
+  endif
+
+  " Check max time.
+  if g:ac_smooth_scroll_enable_accelerating
+    if elapsed_time > g:ac_smooth_scroll_max_limit_msec
+      let s:key_count = 0
+    endif
+    let s:key_count += 1
+  endif
 
   let wlcount = winheight(0) / a:windiv
   let step = s:calc_step(wlcount)

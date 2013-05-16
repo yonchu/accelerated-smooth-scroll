@@ -15,7 +15,8 @@ let g:ac_smooth_scroll_du_sleep_time_msec = get(g:, 'ac_smooth_scroll_du_sleep_t
 let g:ac_smooth_scroll_fb_sleep_time_msec = get(g:, 'ac_smooth_scroll_fb_sleep_time_msec', 10)
 let g:ac_smooth_scroll_skip_redraw_line_size = get(g:, 'ac_smooth_scroll_skip_redraw_line_size', 0)
 
-let g:ac_smooth_scroll_limit_msec = get(g:, 'ac_smooth_scroll_limit_msec', 200)
+let g:ac_smooth_scroll_min_limit_msec = get(g:, 'ac_smooth_scroll_min_limit_msec', 30)
+let g:ac_smooth_scroll_max_limit_msec = get(g:, 'ac_smooth_scroll_max_limit_msec', 300)
 
 if !exists('*g:ac_smooth_scroll_calc_step')
   function! g:ac_smooth_scroll_calc_step(key_count, wlcount)

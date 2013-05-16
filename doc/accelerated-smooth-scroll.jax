@@ -77,8 +77,14 @@ g:ac_smooth_scroll_fb_sleep_time_msec         *g:ac_smooth_scroll_fb_sleep_time_
     1ページ移動時(<C-f>, <C-b>)のスリープ時間の初期値(ミリ秒)。
     (Default: 5)
 
-g:ac_smooth_scroll_limit_msec                 *g:ac_smooth_scroll_limit_msec*
-    連続スクロールの検出時間(ミリ秒)。
+g:ac_smooth_scroll_min_limit_msec                 *g:ac_smooth_scroll_min_limit_msec*
+    連続スクロールを検出する最小時間(ミリ秒)。
+    この時間より短い時間内にキー入力を検知し場合は無視し、スクロールは行わない。
+    キーを押し続けた場合などにスクロールしすぎないようにする。
+    (Default: 30)
+
+g:ac_smooth_scroll_max_limit_msec                 *g:ac_smooth_scroll_max_limit_msec*
+    連続スクロールを検出する最大時間(ミリ秒)。
     この時間以内にキーが押下された場合、連続スクロールと見なす。
     (Default: 200)
 
