@@ -95,13 +95,6 @@ endfunction
 
 " Global functions {{{
 function! ac_smooth_scroll#scroll(cmd, windiv, sleep_time_msec)
-  " Disable highlight the screen line of the cursor,
-  " because will make screen redrawing slower.
-  let save_cul = &cul
-  if save_cul
-    set nocul
-  endif
-
   let elapsed_time = s:get_elapsed_time(a:cmd, a:windiv)
 
   " Check min time.
@@ -122,11 +115,18 @@ function! ac_smooth_scroll#scroll(cmd, windiv, sleep_time_msec)
   let sleep_time_msec = s:calc_sleep_time_msec(a:sleep_time_msec)
   let skip_redraw_line_size = s:calc_skip_redraw_line_size()
 
+  " Disable highlight the screen line of the cursor,
+  " because will make screen redrawing slower.
+  let save_cul = &cul
+  if save_cul
+    set nocul
+  endif
+
   call s:scroll(a:cmd, step, sleep_time_msec, skip_redraw_line_size, wlcount)
 
-  let s:{a:cmd}{a:windiv}_timestamp_misec = reltime()
-
   if save_cul | set cul | endif
+
+  let s:{a:cmd}{a:windiv}_timestamp_misec = reltime()
 endfunction
 " }}}
 
