@@ -161,12 +161,20 @@ function! ac_smooth_scroll#scroll(cmd, windiv, sleep_time_msec, is_vmode)
   " Disable highlight the screen line of the cursor,
   " because will make screen redrawing slower.
   let save_cul = &cul
+  let save_vb = &vb
+  let save_t_vb = &t_vb
   if save_cul
     set nocul
   endif
+  if !save_vb
+    set vb
+  endif
+  set t_vb=
 
   call s:scroll(a:cmd, step, sleep_time_msec, skip_redraw_line_size, wlcount, a:is_vmode)
 
+  let &t_vb = save_t_vb
+  if !save_vb | set novb | endif
   if save_cul | set cul | endif
 
   let s:{a:cmd}{a:windiv}_timestamp_misec = reltime()
