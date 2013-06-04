@@ -55,6 +55,22 @@ MAPPINGS                              *accelerated-smooth-scroll-key-mappings*
     1ページ上にスクロールする。
     <C-b>の置き換え。
 
+<Plug>(ac-smooth-scroll-c-d_v)                 *<Plug>(ac-smooth-scroll-c-d_v)*
+    Visual mode で半ページ下にスクロールする。
+    <C-d>の置き換え。
+
+<Plug>(ac-smooth-scroll-c-u_v)                 *<Plug>(ac-smooth-scroll-c-u_v)*
+    Visual mode で半ページ上にスクロールする。
+    <C-u>の置き換え。
+
+<Plug>(ac-smooth-scroll-c-f_v)                 *<Plug>(ac-smooth-scroll-c-f_v)*
+    Visual mode で1ページ下にスクロールする。
+    <C-f>の置き換え。
+
+<Plug>(ac-smooth-scroll-c-b_v)                 *<Plug>(ac-smooth-scroll-c-b_v)*
+    Visual mode で1ページ上にスクロールする。
+    <C-b>の置き換え。
+
 ==============================================================================
 SETTINGS                                   *accelerated-smooth-scroll-setting*
 
@@ -64,6 +80,11 @@ VARIABLES                                *accelerated-smooth-scroll-variables*
 g:ac_smooth_scroll_no_default_key_mappings    *g:ac_smooth_scroll_no_default_key_mappings*
     デフォルトキーマッピングを無効にする。
     (Default: 0)
+
+g:ac_smooth_scroll_visualmode_key_mappings    *g:ac_smooth_scroll_visualmode_key_mappings*
+    Visual mode のキーマッピングを有効にする。
+    (Default: 1)
+    Note: カーソル位置を固定してスクロールさせたい場合は、"|set| |lazyredraw|" を設定する必要がある。
 
 g:ac_smooth_scroll_enable_accelerating        *g:ac_smooth_scroll_enable_accelerating*
     スクロールの加速を行うかどうかを設定。

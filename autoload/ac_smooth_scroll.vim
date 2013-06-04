@@ -30,32 +30,64 @@ function! s:calc_skip_redraw_line_size()
   return g:ac_smooth_scroll_calc_skip_redraw_line_size(s:key_count, g:ac_smooth_scroll_skip_redraw_line_size)
 endfunction
 
-function! s:scroll(cmd, step, sleep_time_msec, skip_redraw_line_size, wlcount)
+function! s:next_line_num(cmd, lnum, step)
+  if a:cmd == 'j'
+    let lnum = a:lnum + a:step
+  else
+    let lnum = a:lnum - a:step
+    if lnum < 1
+      let lnum = 1
+    endif
+  endif
+  return lnum
+endfunction
+
+function! s:scroll(cmd, step, sleep_time_msec, skip_redraw_line_size, wlcount, is_vmode)
+  " Setup for visual mode.
+  if a:is_vmode
+    if a:cmd == 'j'
+      call setpos('.', getpos("'>"))
+    else
+      call setpos('.', getpos("'<"))
+    endif
+    let save_lazyredraw = &lazyredraw
+    if !save_lazyredraw
+      set lazyredraw
+    endif
+  endif
+
   " Make the command to move display.
   " Calc tob and vbl.
-  let move_disp_cmd = 'normal! '
   if a:cmd == 'j'
     " Scroll down.
     let tob = line('$')
     let vbl = 'w$'
-    let move_disp_cmd = move_disp_cmd."\<C-E>"
+    let move_disp_cmd = "\<C-E>"
   else
     " Scroll up.
     let tob = 1
     let vbl = 'w0'
-    let move_disp_cmd = move_disp_cmd."\<C-Y>"
+    let move_disp_cmd = "\<C-Y>"
   endif
 
   " Make the command to sleep.
   let sleep_cmd = 'sleep '.a:sleep_time_msec.'m'
 
+  " Loop start.
   let i = 0
   let j = 0
   while i < a:wlcount
     let rest = a:wlcount - i
     " Move cursor without moving display, if top or end of file is displaied.
     if line(vbl) == tob
-      execute 'normal! '.rest.a:cmd
+      " Move cursor.
+      if a:is_vmode
+        execute "normal! \<ESC>"
+        normal! gv
+        execute 'normal! '.rest.a:cmd
+      else
+        execute 'normal! '.rest.a:cmd
+      endif
       break
     endif
 
@@ -67,21 +99,27 @@ function! s:scroll(cmd, step, sleep_time_msec, skip_redraw_line_size, wlcount)
     endif
 
     " Move cursor.
-    execute 'normal! '.step.a:cmd
-    let k = 0
-    " Move display.
-    while k < step
-      let k +=1
-      execute move_disp_cmd
-    endwhile
+    if a:is_vmode
+      execute "normal! \<ESC>"
+      normal! gv
+      execute 'normal! '.step.a:cmd
+    else
+      execute 'normal! '.step.a:cmd
+    endif
 
+    " Move display.
+    if !a:is_vmode || a:is_vmode && save_lazyredraw
+      execute 'normal! '.step.move_disp_cmd
+    endif
+
+    " Redraw and Sleep.
     if i < a:wlcount
       " Redraw.
       if j >= a:skip_redraw_line_size
         let j = 0
         redraw
       else
-        let j = j + 1
+        let j += 1
       endif
       " Sleep.
       if a:sleep_time_msec > 0
@@ -89,16 +127,21 @@ function! s:scroll(cmd, step, sleep_time_msec, skip_redraw_line_size, wlcount)
       endif
     endif
   endwhile
+  if a:is_vmode
+    if !save_lazyredraw | set nolazyredraw | endif
+  endif
 endfunction
 " }}}
 
 
 " Global functions {{{
-function! ac_smooth_scroll#scroll(cmd, windiv, sleep_time_msec)
+function! ac_smooth_scroll#scroll(cmd, windiv, sleep_time_msec, is_vmode)
   let elapsed_time = s:get_elapsed_time(a:cmd, a:windiv)
 
   " Check min time.
-  if elapsed_time >= 0 && elapsed_time < g:ac_smooth_scroll_min_limit_msec
+  if !a:is_vmode
+        \ && elapsed_time >= 0
+        \ && elapsed_time < g:ac_smooth_scroll_min_limit_msec
     return
   endif
 
@@ -122,7 +165,7 @@ function! ac_smooth_scroll#scroll(cmd, windiv, sleep_time_msec)
     set nocul
   endif
 
-  call s:scroll(a:cmd, step, sleep_time_msec, skip_redraw_line_size, wlcount)
+  call s:scroll(a:cmd, step, sleep_time_msec, skip_redraw_line_size, wlcount, a:is_vmode)
 
   if save_cul | set cul | endif
 

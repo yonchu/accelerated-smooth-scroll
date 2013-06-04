@@ -43,15 +43,26 @@ endif
 
 
 " Interfaces {{{
+
 nnoremap <silent> <Plug>(ac-smooth-scroll-c-d)
-      \ :<C-u>call ac_smooth_scroll#scroll('j', 2, g:ac_smooth_scroll_du_sleep_time_msec)<cr>
+     \ :<C-u>call ac_smooth_scroll#scroll('j', 2, g:ac_smooth_scroll_du_sleep_time_msec, 0)<cr>
 nnoremap <silent> <Plug>(ac-smooth-scroll-c-u)
-      \ :<C-u>call ac_smooth_scroll#scroll('k', 2, g:ac_smooth_scroll_du_sleep_time_msec)<cr>
+     \ :<C-u>call ac_smooth_scroll#scroll('k', 2, g:ac_smooth_scroll_du_sleep_time_msec, 0)<cr>
 
 nnoremap <silent> <Plug>(ac-smooth-scroll-c-f)
-      \ :<C-u>call ac_smooth_scroll#scroll('j', 1, g:ac_smooth_scroll_fb_sleep_time_msec)<cr>
+     \ :<C-u>call ac_smooth_scroll#scroll('j', 1, g:ac_smooth_scroll_fb_sleep_time_msec, 0)<cr>
 nnoremap <silent> <Plug>(ac-smooth-scroll-c-b)
-      \ :<C-u>call ac_smooth_scroll#scroll('k', 1, g:ac_smooth_scroll_fb_sleep_time_msec)<cr>
+     \ :<C-u>call ac_smooth_scroll#scroll('k', 1, g:ac_smooth_scroll_fb_sleep_time_msec, 0)<cr>
+
+xnoremap <silent> <Plug>(ac-smooth-scroll-c-d_v)
+     \ :<C-u>call ac_smooth_scroll#scroll('j', 2, g:ac_smooth_scroll_du_sleep_time_msec, 1)<cr>
+xnoremap <silent> <Plug>(ac-smooth-scroll-c-u_v)
+     \ :<C-u>call ac_smooth_scroll#scroll('k', 2, g:ac_smooth_scroll_du_sleep_time_msec, 1)<cr>
+
+xnoremap <silent> <Plug>(ac-smooth-scroll-c-f_v)
+     \ :<C-u>call ac_smooth_scroll#scroll('j', 1, g:ac_smooth_scroll_fb_sleep_time_msec, 1)<cr>
+xnoremap <silent> <Plug>(ac-smooth-scroll-c-b_v)
+     \ :<C-u>call ac_smooth_scroll#scroll('k', 1, g:ac_smooth_scroll_fb_sleep_time_msec, 1)<cr>
 " }}}
 
 
@@ -61,6 +72,12 @@ if !get(g:, 'ac_smooth_scroll_no_default_key_mappings', 0)
   nmap <silent> <C-u> <Plug>(ac-smooth-scroll-c-u)
   nmap <silent> <C-f> <Plug>(ac-smooth-scroll-c-f)
   nmap <silent> <C-b> <Plug>(ac-smooth-scroll-c-b)
+  if get(g:, 'ac_smooth_scroll_visualmode_key_mappings', 1)
+    xmap <silent> <C-d> <Plug>(ac-smooth-scroll-c-d_v)
+    xmap <silent> <C-u> <Plug>(ac-smooth-scroll-c-u_v)
+    xmap <silent> <C-f> <Plug>(ac-smooth-scroll-c-f_v)
+    xmap <silent> <C-b> <Plug>(ac-smooth-scroll-c-b_v)
+  endif
 endif
 " }}}
 
