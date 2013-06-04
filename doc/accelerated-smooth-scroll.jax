@@ -83,6 +83,13 @@ g:ac_smooth_scroll_min_limit_msec                 *g:ac_smooth_scroll_min_limit_
     キーを押し続けた場合などにスクロールしすぎないようにする。
     (Default: 30)
 
+    ターミナル背景に画像を設定している場合など、描画速度が遅い環境で使用する場合は、
+    この値を大きくすると良いでしょう。
+
+    Example: >
+        let g:ac_smooth_scroll_min_limit_msec = 80
+    <
+
 g:ac_smooth_scroll_max_limit_msec                 *g:ac_smooth_scroll_max_limit_msec*
     連続スクロールを検出する最大時間(ミリ秒)。
     この時間以内にキーが押下された場合、連続スクロールと見なす。
