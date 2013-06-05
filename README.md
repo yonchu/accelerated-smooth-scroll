@@ -6,6 +6,11 @@ Moreover, the scroll speed will be accelerated, if you consecutively scroll.
 
 `<C-D>/<C-U>` and `<C-F>/<C-B>` keys are replaced by default.
 
+Introduction Movie:
+
+ - [Vim plugin - accelerated-smooth-scroll - YouTube](http://www.youtube.com/watch?v=mGMgAiS8Xtg)
+
+
 ## Installation
 
 Place this plugin into vimfiles or .vim directory.
