@@ -11,6 +11,7 @@ Usage                                 |accelerated-smooth-scroll-usage|
 Interfaces                            |accelerated-smooth-scroll-interfaces|
   Functions                           |accelerated-smooth-scroll-functions|
   Mappings                            |accelerated-smooth-scroll-key-mappings|
+  Autocmd                             |accelerated-smooth-scroll-autocmd|
 Settings                              |accelerated-smooth-scroll-settings|
   Variables                           |accelerated-smooth-scroll-variables|
 
@@ -70,6 +71,26 @@ MAPPINGS                              *accelerated-smooth-scroll-key-mappings*
 <Plug>(ac-smooth-scroll-c-b_v)                 *<Plug>(ac-smooth-scroll-c-b_v)*
     Visual mode で1ページ上にスクロールする。
     <C-b>の置き換え。
+
+------------------------------------------------------------------------------
+AUTOCMD                                     *accelerated-smooth-scroll-autocmd*
+
+スクロール開始時やスクロール終了時に任意のコマンドを実行したい場合に使用して下さい。
+
+AcSmoothScrollEnter                                       *AcSmoothScrollEnter*
+    スクロール開始時に呼ばれます。
+
+AcSmoothScrollLeave                                       *AcSmoothScrollLeave*
+    スクロール終了時に呼ばれます。
+
+Example: >
+    augroup Example
+        autocmd!
+        " スクロール中 myusuf3/numbers.vim をオフにする
+        autocmd User AcSmoothScrollEnter NumbersToggle
+        autocmd User AcSmoothScrollLeave NumbersToggle
+    augroup END
+<
 
 ==============================================================================
 SETTINGS                                   *accelerated-smooth-scroll-setting*

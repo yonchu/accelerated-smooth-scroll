@@ -14,6 +14,20 @@ function! s:get_elapsed_time(cmd, windiv)
     return msec
 endfunction
 
+augroup ac-smooth-scroll-dummy-group
+  autocmd!
+augroup END
+autocmd ac-smooth-scroll-dummy-group User AcSmoothScrollEnter silent! execute ''
+autocmd ac-smooth-scroll-dummy-group User AcSmoothScrollLeave silent! execute ''
+
+let s:cache_command = {}
+function! s:doautocmd_user(command)
+  if !has_key(s:cache_command, a:command)
+    let s:cache_command[a:command] = "doautocmd <nomodeline> User " . a:command
+  endif
+  execute s:cache_command[a:command]
+endfunction
+
 function! s:calc_step(wlcount)
   if !g:ac_smooth_scroll_enable_accelerating
     return 1
@@ -158,6 +172,9 @@ function! ac_smooth_scroll#scroll(cmd, windiv, sleep_time_msec, is_vmode)
   let sleep_time_msec = s:calc_sleep_time_msec(a:sleep_time_msec)
   let skip_redraw_line_size = s:calc_skip_redraw_line_size()
 
+  " Do autocmd for Enter.
+  call s:doautocmd_user('AcSmoothScrollEnter')
+
   " Disable highlight the screen line of the cursor,
   " because will make screen redrawing slower.
   let save_cul = &cul
@@ -173,9 +190,13 @@ function! ac_smooth_scroll#scroll(cmd, windiv, sleep_time_msec, is_vmode)
 
   call s:scroll(a:cmd, step, sleep_time_msec, skip_redraw_line_size, wlcount, a:is_vmode)
 
+  " Restore changed settings.
   let &t_vb = save_t_vb
   if !save_vb | set novb | endif
   if save_cul | set cul | endif
+
+  " Do autocmd for Leave.
+  call s:doautocmd_user('AcSmoothScrollLeave')
 
   let s:{a:cmd}{a:windiv}_timestamp_misec = reltime()
 endfunction
