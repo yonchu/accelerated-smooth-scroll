@@ -1,7 +1,10 @@
 *accelerated-smooth-scroll.jax*        Vim plugin for accelerated smooth scroll.
 
 Author     : Yonchu <yuyuchu3333@gmail.com>
-Home Page  : https://github.com/yonchu/accelerated-smooth-scroll
+License    : Mit License
+Home Page  : http://yonchu.hatenablog.com/entry/2013/05/16/204727
+Repository : https://github.com/yonchu/accelerated-smooth-scroll
+Last Change: 27 Jun 2013.
 
 ==============================================================================
 CONTENTS                                  *accelerated-smooth-scroll-contents*
@@ -117,13 +120,13 @@ g:ac_smooth_scroll_du_sleep_time_msec         *g:ac_smooth_scroll_du_sleep_time_
 
 g:ac_smooth_scroll_fb_sleep_time_msec         *g:ac_smooth_scroll_fb_sleep_time_msec*
     1ページ移動時(<C-f>, <C-b>)のスリープ時間の初期値(ミリ秒)。
-    (Default: 5)
+    (Default: 10)
 
 g:ac_smooth_scroll_min_limit_msec                 *g:ac_smooth_scroll_min_limit_msec*
     連続スクロールを検出する最小時間(ミリ秒)。
     この時間より短い時間内にキー入力を検知し場合は無視し、スクロールは行わない。
     キーを押し続けた場合などにスクロールしすぎないようにする。
-    (Default: 30)
+    (Default: 50)
 
     ターミナル背景に画像を設定している場合など、描画速度が遅い環境で使用する場合は、
     この値を大きくすると良いでしょう。
@@ -135,18 +138,25 @@ g:ac_smooth_scroll_min_limit_msec                 *g:ac_smooth_scroll_min_limit_
 g:ac_smooth_scroll_max_limit_msec                 *g:ac_smooth_scroll_max_limit_msec*
     連続スクロールを検出する最大時間(ミリ秒)。
     この時間以内にキーが押下された場合、連続スクロールと見なす。
-    (Default: 200)
+    (Default: 300)
 
 ------------------------------------------------------------------------------
 FUNCTIONS                                 *accelerated-smooth-scroll-functions*
 
 以下関数をOverrideすることで、スクロールの加速度を微調整することができます。
+(この関数の使用は、将来変更される可能性があります)
 
 g:ac_smooth_scroll_calc_step(key_count, wlcount)                       *g:ac_smooth_scroll_calc_step*
     一度にスクロールするステップ数を取得する。
 
+    key_count : キーを押した回数 (<C-d>/<C-u> or <C-F>/<C-B>)
+    wlcount   : 全体で移動する行数 (半ページ or 1ページの行数)
+
 g:ac_smooth_scroll_calc_sleep_time_msec(key_count, sleep_time_msec)    *g:ac_smooth_scroll_calc_sleep_time_msec*
     ステップ数スクロール後のスリープ時間を取得する。
+
+    key_count       : キーを押した回数 (<C-d>/<C-u> or <C-F>/<C-B>)
+    sleep_time_msec : スリープ時間の初期値
 
 ==============================================================================
 vim:tw=78:fo=tcq2mM:ts=8:ft=help:norl
