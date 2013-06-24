@@ -36,5 +36,3 @@ Bundle 'yonchu/accelerated-smooth-scroll'
 
 I am sorry if my English is hard to understand.
 Please feel free to point it out if there are any mistakes and improvements,
-
-The help file for this plugin has not been translated yet. Sorry.

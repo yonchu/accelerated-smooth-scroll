@@ -1,0 +1,158 @@
+*accelerated-smooth-scroll.txt*        Vim plugin for accelerated smooth scroll.
+
+Author     : Yonchu <yuyuchu3333@gmail.com>
+License    : Mit License
+Home Page  : http://yonchu.hatenablog.com/entry/2013/05/16/204727
+Repository : https://github.com/yonchu/accelerated-smooth-scroll
+Last Change: 27 Jun 2013.
+
+==============================================================================
+CONTENTS                                  *accelerated-smooth-scroll-contents*
+
+Introduction                          |accelerated-smooth-scroll-introduction|
+Usage                                 |accelerated-smooth-scroll-usage|
+Interfaces                            |accelerated-smooth-scroll-interfaces|
+  Mappings                            |accelerated-smooth-scroll-key-mappings|
+  Autocmd                             |accelerated-smooth-scroll-autocmd|
+Settings                              |accelerated-smooth-scroll-settings|
+  Variables                           |accelerated-smooth-scroll-variables|
+  Functions                           |accelerated-smooth-scroll-functions|
+
+==============================================================================
+INTRODUCTION                          *accelerated-smooth-scroll-introduction*
+
+The *accelerated-smooth-scroll* plugin makes scrolling with smooth animation in Vim.
+Moreover, the scroll speed will be accelerated, if you consecutively scroll.
+
+`<C-D>/<C-U>` and `<C-F>/<C-B>` keys are replaced by default.
+
+==============================================================================
+USAGE                                        *accelerated-smooth-scroll-usage*
+
+Example: >
+
+    The following mappings by default:
+
+    nmap <silent> <C-d> <Plug>(ac-smooth-scroll-c-d)
+    nmap <silent> <C-u> <Plug>(ac-smooth-scroll-c-u)
+    nmap <silent> <C-f> <Plug>(ac-smooth-scroll-c-f)
+    nmap <silent> <C-b> <Plug>(ac-smooth-scroll-c-b)
+<
+
+==============================================================================
+INTERFACES                              *accelerated-smooth-scroll-interfaces*
+
+------------------------------------------------------------------------------
+MAPPINGS                              *accelerated-smooth-scroll-key-mappings*
+
+<Plug>(ac-smooth-scroll-c-d)                     *<Plug>(ac-smooth-scroll-c-d)*
+    Scroll up half-page like |<C-d>| key.
+
+<Plug>(ac-smooth-scroll-c-u)                     *<Plug>(ac-smooth-scroll-c-u)*
+    Scroll down half-page like |<C-u>| key.
+
+<Plug>(ac-smooth-scroll-c-f)                     *<Plug>(ac-smooth-scroll-c-f)*
+    Scroll up a page like |<C-f>| key.
+
+<Plug>(ac-smooth-scroll-c-b)                     *<Plug>(ac-smooth-scroll-c-b)*
+    Scroll down a page like |<C-b>| key.
+
+<Plug>(ac-smooth-scroll-c-d_v)                 *<Plug>(ac-smooth-scroll-c-d_v)*
+    Scroll up half-page like |<C-d>| key for Visual mode.
+
+<Plug>(ac-smooth-scroll-c-u_v)                 *<Plug>(ac-smooth-scroll-c-u_v)*
+    Scroll down half-page like |<C-u>| key for Visual mode.
+
+<Plug>(ac-smooth-scroll-c-f_v)                 *<Plug>(ac-smooth-scroll-c-f_v)*
+    Scroll up a page like |<C-f>| key for Visual mode.
+
+<Plug>(ac-smooth-scroll-c-b_v)                 *<Plug>(ac-smooth-scroll-c-b_v)*
+    Scroll down a page like |<C-b>| key for Visual mode.
+
+------------------------------------------------------------------------------
+AUTOCMD                                     *accelerated-smooth-scroll-autocmd*
+
+The following autocmd events is defined.
+You can use events to execute automatically any commands when enter and leave scrolling.
+
+AcSmoothScrollEnter                                       *AcSmoothScrollEnter*
+   Run before enter scrolling.
+
+AcSmoothScrollLeave                                       *AcSmoothScrollLeave*
+   Run after leave scrolling.
+
+Example: >
+    augroup Example
+        autocmd!
+        " Turn off myusuf3/numbers.vim while smooth scroll running.
+        autocmd User AcSmoothScrollEnter NumbersToggle
+        autocmd User AcSmoothScrollLeave NumbersToggle
+    augroup END
+<
+
+==============================================================================
+SETTINGS                                   *accelerated-smooth-scroll-setting*
+
+------------------------------------------------------------------------------
+VARIABLES                                *accelerated-smooth-scroll-variables*
+
+g:ac_smooth_scroll_no_default_key_mappings    *g:ac_smooth_scroll_no_default_key_mappings*
+    Disable all default key mappings.
+    (Default: 0)
+
+g:ac_smooth_scroll_visualmode_key_mappings    *g:ac_smooth_scroll_visualmode_key_mappings*
+    Enable key mappings for Visual mode.
+    (Default: 1)
+    Note that if you want to fix cursor, you need to set "|set| |lazyredraw|"
+    in your .vimrc position.
+
+g:ac_smooth_scroll_enable_accelerating        *g:ac_smooth_scroll_enable_accelerating*
+    Enable accelerating scroll.
+    (Default: 1)
+
+g:ac_smooth_scroll_du_sleep_time_msec         *g:ac_smooth_scroll_du_sleep_time_msec*
+    Sleep time (msec) when first scrolling half-page.
+    (Default: 10)
+
+g:ac_smooth_scroll_fb_sleep_time_msec         *g:ac_smooth_scroll_fb_sleep_time_msec*
+    Sleep time (msec) when first scrolling a page.
+    (Default: 10)
+
+g:ac_smooth_scroll_min_limit_msec             *g:ac_smooth_scroll_min_limit_msec*
+    Minimum time (msec) to detect consecutively scroll.
+    Key input is ingored if detect it less than this value.
+    It makes not too much to scroll by consecutively scroll.
+    (Default: 50)
+
+    If this plugin is used in an environment with slow redering speed,
+    you should enlarge this value.
+
+    Example: >
+        let g:ac_smooth_scroll_min_limit_msec = 80
+    <
+
+g:ac_smooth_scroll_max_limit_msec              *g:ac_smooth_scroll_max_limit_msec*
+    Maximum time (msec) to detect consecutively scroll.
+    Key input is ignored if detect it more than this value.
+    (Default: 300)
+
+------------------------------------------------------------------------------
+FUNCTIONS                                 *accelerated-smooth-scroll-functions*
+
+You can use the following functions to change scroll acceleration.
+Note that the specifications of thease functions whould be possible to be changed.
+
+g:ac_smooth_scroll_calc_step(key_count, wlcount)                       *g:ac_smooth_scroll_calc_step*
+    Calculate the step count.
+
+    key_count : Input key count (<C-d>/<C-u> or <C-F>/<C-B>)
+    wlcount   : Total line count to move (half page or a page line count)
+
+g:ac_smooth_scroll_calc_sleep_time_msec(key_count, sleep_time_msec)    *g:ac_smooth_scroll_calc_sleep_time_msec*
+    Calculate the sleep time.
+
+    key_count       : Input key count (<C-d>/<C-u> or <C-F>/<C-B>)
+    sleep_time_msec : Initial value of sleep time (msec)
+
+==============================================================================
+vim:tw=78:fo=tcq2mM:ts=8:ft=help:norl
