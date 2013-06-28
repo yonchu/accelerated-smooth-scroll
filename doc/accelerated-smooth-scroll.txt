@@ -1,7 +1,7 @@
 *accelerated-smooth-scroll.txt*        Vim plugin for accelerated smooth scroll.
 
 Author     : Yonchu <yuyuchu3333@gmail.com>
-License    : Mit License
+License    : MITLicense
 Home Page  : http://yonchu.hatenablog.com/entry/2013/05/16/204727
 Repository : https://github.com/yonchu/accelerated-smooth-scroll
 Last Change: 27 Jun 2013.
@@ -21,7 +21,7 @@ Settings                              |accelerated-smooth-scroll-settings|
 ==============================================================================
 INTRODUCTION                          *accelerated-smooth-scroll-introduction*
 
-The *accelerated-smooth-scroll* plugin makes scrolling with smooth animation in Vim.
+The *accelerated-smooth-scroll* plugin makes scrolling with a smooth animation in Vim.
 Moreover, the scroll speed will be accelerated, if you consecutively scroll.
 
 `<C-D>/<C-U>` and `<C-F>/<C-B>` keys are replaced by default.
@@ -72,8 +72,8 @@ MAPPINGS                              *accelerated-smooth-scroll-key-mappings*
 ------------------------------------------------------------------------------
 AUTOCMD                                     *accelerated-smooth-scroll-autocmd*
 
-The following autocmd events is defined.
-You can use events to execute automatically any commands when enter and leave scrolling.
+The following autocmd events are defined.
+You can use events to execute automatically any commands when entering and leaving scrolling.
 
 AcSmoothScrollEnter                                       *AcSmoothScrollEnter*
    Run before enter scrolling.
@@ -104,7 +104,7 @@ g:ac_smooth_scroll_visualmode_key_mappings    *g:ac_smooth_scroll_visualmode_key
     Enable key mappings for Visual mode.
     (Default: 1)
     Note that if you want to fix cursor, you need to set "|set| |lazyredraw|"
-    in your .vimrc position.
+    in your .vimrc configuration file.
 
 g:ac_smooth_scroll_enable_accelerating        *g:ac_smooth_scroll_enable_accelerating*
     Enable accelerating scroll.
@@ -119,13 +119,12 @@ g:ac_smooth_scroll_fb_sleep_time_msec         *g:ac_smooth_scroll_fb_sleep_time_
     (Default: 10)
 
 g:ac_smooth_scroll_min_limit_msec             *g:ac_smooth_scroll_min_limit_msec*
-    Minimum time (msec) to detect consecutively scroll.
-    Key input is ingored if detect it less than this value.
-    It makes not too much to scroll by consecutively scroll.
+    Minimum time (msec) to detect consecutive scrolling.
+    Key input is ingore if triggered within this value.
     (Default: 50)
 
     If this plugin is used in an environment with slow redering speed,
-    you should enlarge this value.
+    you should make this value higher.
 
     Example: >
         let g:ac_smooth_scroll_min_limit_msec = 80
@@ -133,14 +132,13 @@ g:ac_smooth_scroll_min_limit_msec             *g:ac_smooth_scroll_min_limit_msec
 
 g:ac_smooth_scroll_max_limit_msec              *g:ac_smooth_scroll_max_limit_msec*
     Maximum time (msec) to detect consecutively scroll.
-    Key input is ignored if detect it more than this value.
     (Default: 300)
 
 ------------------------------------------------------------------------------
 FUNCTIONS                                 *accelerated-smooth-scroll-functions*
 
 You can use the following functions to change scroll acceleration.
-Note that the specifications of thease functions whould be possible to be changed.
+Note that the specifications of these functions may change in the future.
 
 g:ac_smooth_scroll_calc_step(key_count, wlcount)                       *g:ac_smooth_scroll_calc_step*
     Calculate the step count.
