@@ -1,10 +1,11 @@
 *accelerated-smooth-scroll.txt*        Vim plugin for accelerated smooth scroll.
 
+Version    : 1.0.0
 Author     : Yonchu <yuyuchu3333@gmail.com>
 License    : MITLicense
 Home Page  : http://yonchu.hatenablog.com/entry/2013/05/16/204727
 Repository : https://github.com/yonchu/accelerated-smooth-scroll
-Last Change: 27 Jun 2013.
+Last Change: 30 Jun 2013.
 
 ==============================================================================
 CONTENTS                                  *accelerated-smooth-scroll-contents*
@@ -17,6 +18,7 @@ Interfaces                            |accelerated-smooth-scroll-interfaces|
 Settings                              |accelerated-smooth-scroll-settings|
   Variables                           |accelerated-smooth-scroll-variables|
   Functions                           |accelerated-smooth-scroll-functions|
+Changelog                             |accelerated-smooth-scroll-changelog|
 
 ==============================================================================
 INTRODUCTION                          *accelerated-smooth-scroll-introduction*
@@ -151,6 +153,12 @@ g:ac_smooth_scroll_calc_sleep_time_msec(key_count, sleep_time_msec)    *g:ac_smo
 
     key_count       : Input key count (<C-d>/<C-u> or <C-F>/<C-B>)
     sleep_time_msec : Initial value of sleep time (msec)
+
+==============================================================================
+CHANGELOG                                 *accelerated-smooth-scroll-changelog*
+
+1.0.0   2013-06-30
+        - Release ver.1.0.0
 
 ==============================================================================
 vim:tw=78:fo=tcq2mM:ts=8:ft=help:norl
