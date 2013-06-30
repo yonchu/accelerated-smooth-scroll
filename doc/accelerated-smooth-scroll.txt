@@ -1,6 +1,6 @@
 *accelerated-smooth-scroll.txt*        Vim plugin for accelerated smooth scroll.
 
-Version    : 1.0.0
+Version    : 1.0.1
 Author     : Yonchu <yuyuchu3333@gmail.com>
 License    : MITLicense
 Home Page  : http://yonchu.hatenablog.com/entry/2013/05/16/204727
@@ -156,6 +156,9 @@ g:ac_smooth_scroll_calc_sleep_time_msec(key_count, sleep_time_msec)    *g:ac_smo
 
 ==============================================================================
 CHANGELOG                                 *accelerated-smooth-scroll-changelog*
+
+1.0.1   2013-06-30
+        - Fix executing doautocmd for old version of Vim
 
 1.0.0   2013-06-30
         - Release ver.1.0.0
