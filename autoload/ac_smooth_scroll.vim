@@ -23,7 +23,11 @@ autocmd ac-smooth-scroll-dummy-group User AcSmoothScrollLeave silent! execute ''
 let s:cache_command = {}
 function! s:doautocmd_user(command)
   if !has_key(s:cache_command, a:command)
-    let s:cache_command[a:command] = "doautocmd <nomodeline> User " . a:command
+    if v:version > 703 || v:version == 703 && has("patch438")
+      let s:cache_command[a:command] = "doautocmd <nomodeline> User " . a:command
+    else
+      let s:cache_command[a:command] = "doautocmd User " . a:command
+    endif
   endif
   execute s:cache_command[a:command]
 endfunction
