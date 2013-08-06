@@ -184,6 +184,8 @@ function! ac_smooth_scroll#scroll(cmd, windiv, sleep_time_msec, is_vmode)
   let save_cul = &cul
   let save_vb = &vb
   let save_t_vb = &t_vb
+  let save_rnu = &rnu
+
   if save_cul
     set nocul
   endif
@@ -192,12 +194,18 @@ function! ac_smooth_scroll#scroll(cmd, windiv, sleep_time_msec, is_vmode)
   endif
   set t_vb=
 
+  if save_rnu == 1
+    set nu
+  endif
+
   call s:scroll(a:cmd, step, sleep_time_msec, skip_redraw_line_size, wlcount, a:is_vmode)
 
   " Restore changed settings.
   let &t_vb = save_t_vb
   if !save_vb | set novb | endif
   if save_cul | set cul | endif
+
+  if save_rnu == 1 | set rnu | endif 
 
   " Do autocmd for Leave.
   call s:doautocmd_user('AcSmoothScrollLeave')
