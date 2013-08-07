@@ -181,23 +181,23 @@ function! ac_smooth_scroll#scroll(cmd, windiv, sleep_time_msec, is_vmode)
 
   " Disable highlight the screen line of the cursor,
   " because will make screen redrawing slower.
-  let save_cul = &cul
-  let save_vb = &vb
-  let save_t_vb = &t_vb
+  let save_cul = &l:cul
+  let save_vb = &l:vb
+  let save_t_vb = &l:t_vb
 
   if save_cul
-    set nocul
+    setl nocul
   endif
   if !save_vb
-    set vb
+    setl vb
   endif
-  set t_vb=
+  setl t_vb=
 
   " Disable relativenumber because scrolling is much slower.
   if v:version >= 703 && g:ac_smooth_scroll_disable_relativenumber
-    let save_rnu = &rnu
+    let save_rnu = &l:rnu
     if save_rnu
-      set nu
+      setl nu
     endif
   endif
 
@@ -205,13 +205,13 @@ function! ac_smooth_scroll#scroll(cmd, windiv, sleep_time_msec, is_vmode)
 
   " Restore relativenumber.
   if v:version >= 703 && g:ac_smooth_scroll_disable_relativenumber
-    if save_rnu | set rnu | endif
+    if save_rnu | setl rnu | endif
   endif
 
   " Restore changed settings.
-  let &t_vb = save_t_vb
-  if !save_vb | set novb | endif
-  if save_cul | set cul | endif
+  let &l:t_vb = save_t_vb
+  if !save_vb | setl novb | endif
+  if save_cul | setl cul | endif
 
   " Do autocmd for Leave.
   call s:doautocmd_user('AcSmoothScrollLeave')
