@@ -5,7 +5,7 @@ Author     : Yonchu <yuyuchu3333@gmail.com>
 License    : MITLicense
 Home Page  : http://yonchu.hatenablog.com/entry/2013/05/16/204727
 Repository : https://github.com/yonchu/accelerated-smooth-scroll
-Last Change: 30 Jun 2013.
+Last Change: 07 Aug 2013.
 
 ==============================================================================
 CONTENTS                                  *accelerated-smooth-scroll-contents*
@@ -110,6 +110,10 @@ g:ac_smooth_scroll_visualmode_key_mappings    *g:ac_smooth_scroll_visualmode_key
 
 g:ac_smooth_scroll_enable_accelerating        *g:ac_smooth_scroll_enable_accelerating*
     Enable accelerating scroll.
+    (Default: 1)
+
+g:ac_smooth_scroll_disable_relativenumber     *g:ac_smooth_scroll_disable_relativenumber*
+    Disable |relativenumber| while scrolling.
     (Default: 1)
 
 g:ac_smooth_scroll_du_sleep_time_msec         *g:ac_smooth_scroll_du_sleep_time_msec*

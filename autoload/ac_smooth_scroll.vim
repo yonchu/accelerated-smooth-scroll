@@ -184,6 +184,7 @@ function! ac_smooth_scroll#scroll(cmd, windiv, sleep_time_msec, is_vmode)
   let save_cul = &cul
   let save_vb = &vb
   let save_t_vb = &t_vb
+
   if save_cul
     set nocul
   endif
@@ -192,7 +193,20 @@ function! ac_smooth_scroll#scroll(cmd, windiv, sleep_time_msec, is_vmode)
   endif
   set t_vb=
 
+  " Disable relativenumber because scrolling is much slower.
+  if v:version >= 703 && g:ac_smooth_scroll_disable_relativenumber
+    let save_rnu = &rnu
+    if save_rnu
+      set nu
+    endif
+  endif
+
   call s:scroll(a:cmd, step, sleep_time_msec, skip_redraw_line_size, wlcount, a:is_vmode)
+
+  " Restore relativenumber.
+  if v:version >= 703 && g:ac_smooth_scroll_disable_relativenumber
+    if save_rnu | set rnu | endif
+  endif
 
   " Restore changed settings.
   let &t_vb = save_t_vb
