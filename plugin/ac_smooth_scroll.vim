@@ -11,6 +11,8 @@ set cpo&vim
 " Global variables {{{
 let g:ac_smooth_scroll_enable_accelerating = get(g:, 'ac_smooth_scroll_enable_accelerating', 1)
 
+let g:ac_smooth_scroll_disable_relativenumber = get(g:, 'g:ac_smooth_scroll_disable_relativenumber', 1)
+
 let g:ac_smooth_scroll_du_sleep_time_msec = get(g:, 'ac_smooth_scroll_du_sleep_time_msec', 10)
 let g:ac_smooth_scroll_fb_sleep_time_msec = get(g:, 'ac_smooth_scroll_fb_sleep_time_msec', 10)
 let g:ac_smooth_scroll_skip_redraw_line_size = get(g:, 'ac_smooth_scroll_skip_redraw_line_size', 0)
