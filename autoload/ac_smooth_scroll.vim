@@ -36,16 +36,16 @@ function! s:calc_step(wlcount)
   if !g:ac_smooth_scroll_enable_accelerating
     return 1
   endif
-  let step = g:ac_smooth_scroll_calc_step(s:key_count, a:wlcount)
+  let step = AcSmoothScrollCalcStep(s:key_count, a:wlcount)
   return step
 endfunction
 
 function! s:calc_sleep_time_msec(sleep_time_msec)
-  return g:ac_smooth_scroll_calc_sleep_time_msec(s:key_count, a:sleep_time_msec)
+  return AcSmoothScrollCalcSleepTimeMsec(s:key_count, a:sleep_time_msec)
 endfunction
 
 function! s:calc_skip_redraw_line_size()
-  return g:ac_smooth_scroll_calc_skip_redraw_line_size(s:key_count, g:ac_smooth_scroll_skip_redraw_line_size)
+  return AcSmoothScrollCalcSkipRedrawLineSize(s:key_count, g:ac_smooth_scroll_skip_redraw_line_size)
 endfunction
 
 function! s:next_line_num(cmd, lnum, step)
