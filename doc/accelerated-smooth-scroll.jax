@@ -152,13 +152,13 @@ FUNCTIONS                                 *accelerated-smooth-scroll-functions*
 以下関数をOverrideすることで、スクロールの加速度を微調整することができます。
 (この関数の使用は、将来変更される可能性があります)
 
-g:ac_smooth_scroll_calc_step(key_count, wlcount)                       *g:ac_smooth_scroll_calc_step*
+AcSmoothScrollCalcStep(key_count, wlcount)                       *AcSmoothScrollCalcStep*
     一度にスクロールするステップ数を取得する。
 
     key_count : キーを押した回数 (<C-d>/<C-u> or <C-F>/<C-B>)
     wlcount   : 全体で移動する行数 (半ページ or 1ページの行数)
 
-g:ac_smooth_scroll_calc_sleep_time_msec(key_count, sleep_time_msec)    *g:ac_smooth_scroll_calc_sleep_time_msec*
+AcSmoothScrollCalcSleepTimeMsec(key_count, sleep_time_msec)    *AcSmoothScrollCalcSleepTimeMsec*
     ステップ数スクロール後のスリープ時間を取得する。
 
     key_count       : キーを押した回数 (<C-d>/<C-u> or <C-F>/<C-B>)
