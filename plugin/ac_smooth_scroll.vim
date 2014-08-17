@@ -20,8 +20,8 @@ let g:ac_smooth_scroll_skip_redraw_line_size = get(g:, 'ac_smooth_scroll_skip_re
 let g:ac_smooth_scroll_min_limit_msec = get(g:, 'ac_smooth_scroll_min_limit_msec', 50)
 let g:ac_smooth_scroll_max_limit_msec = get(g:, 'ac_smooth_scroll_max_limit_msec', 300)
 
-if !exists('*g:ac_smooth_scroll_calc_step')
-  function! g:ac_smooth_scroll_calc_step(key_count, wlcount)
+if !exists('*AcSmoothScrollCalcStep')
+  function! AcSmoothScrollCalcStep(key_count, wlcount)
     if a:key_count > a:wlcount / 2
       return a:wlcount
     endif
@@ -29,14 +29,14 @@ if !exists('*g:ac_smooth_scroll_calc_step')
   endfunction
 endif
 
-if !exists('*g:ac_smooth_scroll_calc_sleep_time_msec')
-  function! g:ac_smooth_scroll_calc_sleep_time_msec(key_count, sleep_time_msec)
+if !exists('*AcSmoothScrollCalcSleepTimeMsec')
+  function! AcSmoothScrollCalcSleepTimeMsec(key_count, sleep_time_msec)
     return  a:sleep_time_msec - (a:key_count - 1)
   endfunction
 endif
 
-if !exists('*g:ac_smooth_scroll_calc_skip_redraw_line_size')
-  function! g:ac_smooth_scroll_calc_skip_redraw_line_size(key_count, skip_redraw_line_size)
+if !exists('*AcSmoothScrollCalcSkipRedrawLineSize')
+  function! AcSmoothScrollCalcSkipRedrawLineSize(key_count, skip_redraw_line_size)
     " return  a:skip_redraw_line_size + (a:key_count - 1)
     return a:skip_redraw_line_size
   endfunction

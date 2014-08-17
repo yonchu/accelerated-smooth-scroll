@@ -146,13 +146,13 @@ FUNCTIONS                                 *accelerated-smooth-scroll-functions*
 You can use the following functions to change scroll acceleration.
 Note that the specifications of these functions may change in the future.
 
-g:ac_smooth_scroll_calc_step(key_count, wlcount)                       *g:ac_smooth_scroll_calc_step*
+AcSmoothScrollCalcStep(key_count, wlcount)                       *AcSmoothScrollCalcStep*
     Calculate the step count.
 
     key_count : Input key count (<C-d>/<C-u> or <C-F>/<C-B>)
     wlcount   : Total line count to move (half page or a page line count)
 
-g:ac_smooth_scroll_calc_sleep_time_msec(key_count, sleep_time_msec)    *g:ac_smooth_scroll_calc_sleep_time_msec*
+AcSmoothScrollCalcSleepTimeMsec(key_count, sleep_time_msec)    *AcSmoothScrollCalcSleepTimeMsec*
     Calculate the sleep time.
 
     key_count       : Input key count (<C-d>/<C-u> or <C-F>/<C-B>)
