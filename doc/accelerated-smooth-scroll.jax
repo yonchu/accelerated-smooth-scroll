@@ -1,11 +1,11 @@
 *accelerated-smooth-scroll.jax*        加速するスームズスクロールプラグイン.
 
-Version    : 1.0.1
+Version    : 1.1.0
 Author     : Yonchu <yuyuchu3333@gmail.com>
 License    : MITLicense
 Home Page  : http://yonchu.hatenablog.com/entry/2013/05/16/204727
 Repository : https://github.com/yonchu/accelerated-smooth-scroll
-Last Change: 18 Aug 2014.
+Last Change: 11 Sep 2014.
 
 ==============================================================================
 CONTENTS                                  *accelerated-smooth-scroll-contents*
@@ -166,6 +166,13 @@ AcSmoothScrollCalcSleepTimeMsec(key_count, sleep_time_msec)    *AcSmoothScrollCa
 
 ==============================================================================
 CHANGELOG                                 *accelerated-smooth-scroll-changelog*
+
+1.1.0   2014-09-11
+        - Disable (and restore after scroll) relative line numbers to improve performance
+        - Add ac_smooth_scroll_disable_relativenumber option (default: 1)
+        - Bugfix
+          - Rename functions not to use global function like g:hogehoge
+          - Use setlocal instead of set to save and restore settings
 
 1.0.1   2013-06-30
         - Fix executing doautocmd for old version of Vim

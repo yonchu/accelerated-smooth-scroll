@@ -16,9 +16,9 @@ endfunction
 
 augroup ac-smooth-scroll-dummy-group
   autocmd!
+  autocmd ac-smooth-scroll-dummy-group User AcSmoothScrollEnter silent! execute ''
+  autocmd ac-smooth-scroll-dummy-group User AcSmoothScrollLeave silent! execute ''
 augroup END
-autocmd ac-smooth-scroll-dummy-group User AcSmoothScrollEnter silent! execute ''
-autocmd ac-smooth-scroll-dummy-group User AcSmoothScrollLeave silent! execute ''
 
 let s:cache_command = {}
 function! s:doautocmd_user(command)
@@ -46,18 +46,6 @@ endfunction
 
 function! s:calc_skip_redraw_line_size()
   return AcSmoothScrollCalcSkipRedrawLineSize(s:key_count, g:ac_smooth_scroll_skip_redraw_line_size)
-endfunction
-
-function! s:next_line_num(cmd, lnum, step)
-  if a:cmd == 'j'
-    let lnum = a:lnum + a:step
-  else
-    let lnum = a:lnum - a:step
-    if lnum < 1
-      let lnum = 1
-    endif
-  endif
-  return lnum
 endfunction
 
 function! s:scroll(cmd, step, sleep_time_msec, skip_redraw_line_size, wlcount, is_vmode)
