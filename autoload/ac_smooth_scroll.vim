@@ -185,7 +185,7 @@ function! ac_smooth_scroll#scroll(cmd, windiv, sleep_time_msec, is_vmode)
   if v:version >= 703 && g:ac_smooth_scroll_disable_relativenumber
     let save_rnu = &l:rnu
     if save_rnu
-      setl nu
+      setl norelativenumber
     endif
   endif
 
