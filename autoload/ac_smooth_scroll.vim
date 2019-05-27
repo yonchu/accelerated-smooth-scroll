@@ -141,7 +141,8 @@ endfunction
 
 
 " Global functions {{{
-function! ac_smooth_scroll#scroll(cmd, windiv, sleep_time_msec, is_vmode)
+function! ac_smooth_scroll#scroll(cmd, windiv, count, sleep_time_msec, is_vmode)
+  let l:count = a:count ? a:count : 1
   let elapsed_time = s:get_elapsed_time(a:cmd, a:windiv)
 
   " Check min time.
@@ -159,8 +160,8 @@ function! ac_smooth_scroll#scroll(cmd, windiv, sleep_time_msec, is_vmode)
     let s:key_count += 1
   endif
 
-  let wlcount = winheight(0) / a:windiv
-  let step = s:calc_step(wlcount)
+  let wlcount = winheight(0) / a:windiv * l:count
+  let step = s:calc_step(wlcount) * (l:wlcount / 40 + 1)
   let sleep_time_msec = s:calc_sleep_time_msec(a:sleep_time_msec)
   let skip_redraw_line_size = s:calc_skip_redraw_line_size()
 
@@ -185,7 +186,7 @@ function! ac_smooth_scroll#scroll(cmd, windiv, sleep_time_msec, is_vmode)
   if v:version >= 703 && g:ac_smooth_scroll_disable_relativenumber
     let save_rnu = &l:rnu
     if save_rnu
-      setl nu
+      setl norelativenumber
     endif
   endif
 

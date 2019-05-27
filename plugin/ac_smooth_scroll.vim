@@ -47,24 +47,24 @@ endif
 " Interfaces {{{
 
 nnoremap <silent> <Plug>(ac-smooth-scroll-c-d)
-     \ :<C-u>call ac_smooth_scroll#scroll('j', 2, g:ac_smooth_scroll_du_sleep_time_msec, 0)<cr>
+     \ :<C-u>call ac_smooth_scroll#scroll('j', 2, v:count, g:ac_smooth_scroll_du_sleep_time_msec, 0)<cr>
 nnoremap <silent> <Plug>(ac-smooth-scroll-c-u)
-     \ :<C-u>call ac_smooth_scroll#scroll('k', 2, g:ac_smooth_scroll_du_sleep_time_msec, 0)<cr>
+     \ :<C-u>call ac_smooth_scroll#scroll('k', 2, v:count, g:ac_smooth_scroll_du_sleep_time_msec, 0)<cr>
 
 nnoremap <silent> <Plug>(ac-smooth-scroll-c-f)
-     \ :<C-u>call ac_smooth_scroll#scroll('j', 1, g:ac_smooth_scroll_fb_sleep_time_msec, 0)<cr>
+     \ :<C-u>call ac_smooth_scroll#scroll('j', 1, v:count, g:ac_smooth_scroll_fb_sleep_time_msec, 0)<cr>
 nnoremap <silent> <Plug>(ac-smooth-scroll-c-b)
-     \ :<C-u>call ac_smooth_scroll#scroll('k', 1, g:ac_smooth_scroll_fb_sleep_time_msec, 0)<cr>
+     \ :<C-u>call ac_smooth_scroll#scroll('k', 1, v:count, g:ac_smooth_scroll_fb_sleep_time_msec, 0)<cr>
 
 xnoremap <silent> <Plug>(ac-smooth-scroll-c-d_v)
-     \ :<C-u>call ac_smooth_scroll#scroll('j', 2, g:ac_smooth_scroll_du_sleep_time_msec, 1)<cr>
+     \ :<C-u>call ac_smooth_scroll#scroll('j', 2, v:count, g:ac_smooth_scroll_du_sleep_time_msec, 1)<cr>
 xnoremap <silent> <Plug>(ac-smooth-scroll-c-u_v)
-     \ :<C-u>call ac_smooth_scroll#scroll('k', 2, g:ac_smooth_scroll_du_sleep_time_msec, 1)<cr>
+     \ :<C-u>call ac_smooth_scroll#scroll('k', 2, v:count, g:ac_smooth_scroll_du_sleep_time_msec, 1)<cr>
 
 xnoremap <silent> <Plug>(ac-smooth-scroll-c-f_v)
-     \ :<C-u>call ac_smooth_scroll#scroll('j', 1, g:ac_smooth_scroll_fb_sleep_time_msec, 1)<cr>
+     \ :<C-u>call ac_smooth_scroll#scroll('j', 1, v:count, g:ac_smooth_scroll_fb_sleep_time_msec, 1)<cr>
 xnoremap <silent> <Plug>(ac-smooth-scroll-c-b_v)
-     \ :<C-u>call ac_smooth_scroll#scroll('k', 1, g:ac_smooth_scroll_fb_sleep_time_msec, 1)<cr>
+     \ :<C-u>call ac_smooth_scroll#scroll('k', 1, v:count, g:ac_smooth_scroll_fb_sleep_time_msec, 1)<cr>
 " }}}
 
 
